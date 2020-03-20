@@ -19,6 +19,9 @@ def exchange_bytes(io1, io2)
       io2.write_byte b
       #puts "-> write byte to  #{io2}"
     rescue e: IO::Timeout | IO::Error
+    rescue e: Errno
+      io1.close
+      io2.close
     end
   end
   puts " exchange_byte #{io1} #{io2} done"
